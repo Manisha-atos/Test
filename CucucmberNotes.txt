@@ -1,0 +1,489 @@
+BDD - Cucumber
+
+- TDD - test Driven development 
+	- test the test case/ test script ----> no piece of code
+	- testcase/test script ---> failed ---> ER <> AR 
+	- what is the expected result 
+	- write the code so that test case get passed
+uname can not be null ---- null fail ---->if unam
+	- test with test case/script --- > ER =AR 
+
+test will drive the development of application -TDD 
+
+extension of TDD - BDD 
+
+- shifting thinking from "testing ---> "behavior" - characteristics of elements 
+
+
+
+Cucumber is a testing tool that supports Behavior Driven Development (BDD). 
+It offers a way to write tests that anybody can understand, 
+regardless of their technical knowledge.
+In BDD, users (business analysts, product owners) first write scenarios or acceptance tests
+that describe the behavior of the system from the customer's perspective, 
+for review and sign-off by the product owners before developers write their codes. 
+Cucumber framework.
+
+Example
+If we are developing a user authentication feature, then the following can be few key test scenarios, 
+which needs to get passed in order to call it a success.
+
+The user should be able to login with correct username and correct password.
+
+The user should not be able to login with incorrect username and correct password.
+
+The user should not be able to login with correct username and incorrect password.
+
+https://www.softwaretestinghelp.com/tdd-vs-bdd/
+
+
+scenario- 
+search module
+
+tester -
+selenium webdriver script-
+
+from
+to
+tickets
+date
+
+
+developer-
+java -
+
+from
+to
+tickets
+date
+
+
+BDD - help all the stakeholders understand on what has been tested with the simple 
+description of english grammar
+
+Features of BDD-
+
+1. Collaborate - Business stakeholders,BA,QA and developers
+2. it will be easy to  describe what is tested
+3. drive the business value
+4. earlier stage defects are identified 
+
+client ----> Elephant to be drawn 
+
+team ----> huge straight block --- > tree ---> leg
+team ----> long rope-----> rope ---> tail
+team ---> big entire space ---> wall---> body of the elephant 
+
+why BDD framework?
+
+---> we can overcome the misscommunication b/w the team.
+---> resolve the defects in earlier stage 
+
+BDD  tools -
+
+--Cucumber --- open source tool ---> behavior ---> simple language --> english ---> gherkin language 
+
+Cucumber--->Ruby
+java,C#,python 
+ 
+Tool for BDD
+--Hiptest
+--Specflow - it is for .net 
+--Easy B
+--JDave
+--Fitnesse
+--TestLeft
+--BeanSpec
+
+Cucumber --->
+
+approach of ---> BDD -
+
+cucumber to eclipse--->http://cucumber.github.io./cucumber-eclipse/update-site/
+
+,
+Keywords for the cucumber - BDD 
+features = "Feature\\feature2.feature"
+
+how to skip the scenario???
+
+Feature:
+ what module/feature is going to be tested 
+ - register an user - create an account
+ - login to the appln- login
+ - search for tickets - search 
+
+Scenario: verify the credinetals of user and create an account 
+          verify the details for valid username and password
+          verify whether the list of availability tickets are displayed 
+
+Given - browser opened , appln with register page is displayed
+When  -enter the firstname,lastname,emailid,address,create a password 
+Then  -suceesfully account will be created
+
+
+Given - open the browser , open the appln - login page 
+When  - enter the username and password
+Then  - sucessfully user can login to the account 
+
+Given - open the browser , open the appln - search module page to be opened
+When  - enter from and to location, date, no of tickets 
+Then  - availability tickets to be displayed 
+
+
+Step1- create a folder - features 
+Step2- create a file ---> features keywords .feature
+Step3- in feature file--> keywords 
+
+Feature:functioanlity of myatos syntel login page
+Scenario:Verify for user to login to the account
+Given Open the chrome browser and open the url of the application
+When Enter the valid username and password
+Then Sucessfully login to the account
+
+
+Step4-create a package,class and import the cucumber jar files
+
+script-
+
+package scriptforfeatures;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Steps {
+	
+	@Given("^Open the chrome browser and open the url of the application$")
+	public void Open_the_chrome_browser_and_open_the_url_of_the_application() {
+		System.out.println("It should open the browser and application");
+	}
+    @When("^Enter the valid username and password$")
+    public void Enter_the_valid_username_and_password() {
+    	System.out.println("Enters username and password");
+    	
+    }
+    
+    @Then("^Sucessfully login to the account$")
+    public void Sucessfully_login_to_the_account() {
+    	System.out.println("login to the account");
+    }
+}
+
+
+Script for selenium webdriver -
+
+package scriptforfeatures;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Steps {
+	WebDriver d1;
+	
+	@Given("^Open the chrome browser and open the url of the application$")
+	public void Open_the_chrome_browser_and_open_the_url_of_the_application() throws Throwable {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\KS5047809\\Desktop\\chromedriver.exe");
+		d1=new ChromeDriver();
+		d1.get("https://www.myatos-syntel.net");
+	}
+    @When("^Enter the valid username and password$")
+    public void Enter_the_valid_username_and_password() throws Throwable {
+    	d1.findElement(By.id("_com_liferay_login_web_portlet_LoginPortlet_kpoUserName")).sendKeys("Karthika");
+    	d1.findElement(By.name("_com_liferay_login_web_portlet_LoginPortlet_password")).sendKeys("hhhk");;
+    	d1.findElement(By.xpath("//button[@type='submit']")).click();  
+    }
+    
+    @Then("^Sucessfully login to the account$")
+    public void Sucessfully_login_to_the_account() throws Throwable {
+    	System.out.println("Sucessfully login to the account");
+    }
+}
+
+
+maven --
+pom.xml
+
+
+Datadriven testing using scenario outline -
+
+Datatdriven testing ---> multiple data test for single functionality 
+
+functionality is one <-----> n of data to be passed
+
+regular expression - replace of exact value to pattern values 
+
+- .* -one or more chars
+- ?  -single char to match 
+-|   -left or right value to match  Yes|No
+-\   -left value or right value to match
+-[]  - in range [A-Z] [0-9]
+-{}  -value to match within the list {a,b,c}
+
+\”(.*)\” and \”(.*)\”$”)
+
+Feature file-
+
+Feature:functioanlity of myatos syntel login page
+Scenario Outline:Verify user to login to the account
+Given Open the chrome browser and open the url of the application
+When Enter the valid "<username>" and "<password>" details
+Then Sucessfully login to the account
+
+Examples:
+|username |password|
+|aaaa			|syntel123|
+|bbbb			|syntel123|
+|cccc			|syntel123|
+
+Steps-
+
+package scriptforfeatures;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.PendingException;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Steps  {
+	WebDriver d1;
+	
+	@Given("^Open the chrome browser and open the url of the application$")
+	public void Open_the_chrome_browser_and_open_the_url_of_the_application() throws Throwable {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\KS5047809\\Desktop\\chromedriver.exe");
+		d1=new ChromeDriver();
+		d1.get("https://www.myatos-syntel.net");
+	}
+
+
+	    
+	    @When("^Enter the valid \"(.*?)\" and \"(.*?)\" details$")
+	    public void enter_the_valid_and_details(String username, String password) throws Throwable {
+    	d1.findElement(By.id("_com_liferay_login_web_portlet_LoginPortlet_kpoUserName")).sendKeys(username);
+    	d1.findElement(By.name("_com_liferay_login_web_portlet_LoginPortlet_password")).sendKeys(password);;
+    	d1.findElement(By.xpath("//button[@type='submit']")).click();  
+    	
+	    throw new PendingException();
+	    }
+    
+    @Then("^Sucessfully login to the account$")
+    public void Sucessfully_login_to_the_account() throws Throwable {
+    	System.out.println("Sucessfully login to the account");
+    }
+}
+
+
+runwith-
+
+package testrun;
+
+import org.junit.runner.RunWith;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features= {"feature1"},
+glue={"scriptforfeatures"})
+public class runner {
+
+}
+
+------------------------------------------------------------------------------------------------------
+
+Cucumber options-
+
+what all the properties need to be given to test the script
+
+feature- setting the path of the feature file
+glue   - setiing the path for the steps of the script which need to be executed 
+dry run-check whether the steps have written for the features - True or False 
+tags   -it will instruct which particular tag or scenario to be executed 
+monochrome-display the output in the console in a specific format - readable or understandable
+format - it will provide format of reports to use for future reference
+strict - will fail the test-  if a step is pending or undefined 
+
+
+report - pretty,usage,html ,json and xml 
+
+pretty - complete feature file details
+usage - time taken for the steps to execute 
+
+{"@SmokeTest,@EndtoEnd"} - OR
+{"@SmokeTest","@EndtoEndtest"} - AND
+~@EndtoEnd"          - it will ignore the tag scenario
+@functionalTest   - it will test all the tags inside the functional tests 
+
+
+
+BDD - Cucumber - Selenium - TestNg 
+
+Step 1: create feature file under src/test/resources
+ 
+Feature: Test login module
+ 
+Scenario: login with valid details
+ 
+Given user opens login application
+When user enter un and enter psd
+Then click login
+And verify login success
+ 
+ 
+Step 2: Create Java class (step definition) under src/test/java
+ 
+package package1;
+ 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+ 
+public class sampleclass {
+WebDriver driver;
+               
+               @Given("user opens login application")
+               public void user_opens_login_application() {
+                              System.setProperty("webdriver.chrome.driver", "C:\\Users\\\chromedriver_win32\\chromedriver.exe");
+                              driver=new ChromeDriver();
+                                driver.get("http://www.myatos-syntel.net");
+               }
+ 
+               @When("user enter un and enter psd")
+               public void user_enter_un_and_enter_psd() {
+                              driver.findElement(By.linkText("SignIn")).click();
+                              driver.findElement(By.name("password")).sendKeys("Password123");
+ 
+                                driver.findElement(By.id("userName")).sendKeys("Karthika");
+               }
+ 
+               @Then("click login")
+               public void click_login() {
+                                driver.findElement(By.name("Login")).click();
+ 
+               }
+ 
+               @Then("verify login success")
+               public void verify_login_success() {
+                  System.out.println("login verified success");
+               }
+ 
+ 
+ 
+ 
+ 
+}
+ 
+Step 3: create runner class under src/test/java
+ 
+package package1;
+ 
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+ 
+@CucumberOptions(features= {"src/test/resources/sample.feature","src/test/resources/sample1.feature"})
+ 
+public class runner extends AbstractTestNGCucumberTests {
+ 
+}
+ 
+Step 4: update Maven POM.XML file
+ 
+<dependencies>                   
+        <dependency>                          
+             <groupId>junit</groupId>                                                 
+             <artifactId>junit</artifactId>                                                  
+             <version>3.8.1</version>                                                 
+             <scope>test</scope>                                                
+        </dependency>                         
+        <dependency>                          
+            <groupId>org.seleniumhq.selenium</groupId>                                                   
+            <artifactId>selenium-java</artifactId>                                                 
+            <version>2.45.0</version>                                                 
+             </dependency>                    
+        <dependency>                          
+            <groupId>org.testng</groupId>                                                    
+            <artifactId>testng</artifactId>                                                  
+            <version>6.8</version>                                                    
+            <scope>test</scope>                                                                
+       </dependency>      
+       <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>4.2.6</version>
+</dependency>
+       <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-testng</artifactId>
+    <version>4.2.6</version>
+</dependency>
+       <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
+<dependency>
+    <groupId>info.cukes</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>1.2.5</version>
+    <scope>test</scope>
+</dependency>
+                           
+</dependencies>
+ 
+<build>
+             <plugins>
+                    <plugin>
+                           <groupId>org.apache.maven.plugins</groupId>
+                           <artifactId>maven-compiler-plugin</artifactId>
+                           <configuration>
+                                 <source>1.8</source>
+                                 <target>1.8</target>
+                           </configuration>
+                    </plugin>
+ 
+                    <plugin>
+                           <groupId>org.apache.maven.plugins</groupId>
+                           <artifactId>maven-surefire-plugin</artifactId>
+                           <version>2.19</version>
+                           <configuration>
+                                 <suiteXmlFiles>
+                                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                                 </suiteXmlFiles>
+                                 <!-- <forkCount>10</forkCount> <reuseForks>true</reuseForks> <includes> 
+                                        <include>**/FeatureRunner.class</include> </includes> -->
+                           </configuration>
+                    </plugin>
+             </plugins>
+       </build> 
+ 
+
+
+======================================================================================================
+
+jars:
+
+cobertura-2.1.1
+cucumber-core-1.2.2
+cucumber-html-0.2.7
+cucumber-java-1.2.2
+cucumber-junit-1.2.2
+cucumber-jvm-deps-1.0.3
+cucumber-reporting-0.1.0
+gherkin-2.12.2
+hamcrest-core-1.3
+junit-4.11 
+
+
+
+
