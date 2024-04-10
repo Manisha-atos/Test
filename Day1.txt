@@ -1,6 +1,2 @@
 Apple1
 Apple2
-
-English
-Maths
-Science
