@@ -7,6 +7,6 @@ System.out.println("Hii");
 System.out.println("Aarush");
 System.out.println(new Date());
 System.out.println("Hello Manisha");
-Sytem.out.println("Hello Kiran");
+System.out.println("Hello Kiran");
 }
 }
